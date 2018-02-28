@@ -47,13 +47,13 @@
   <div class="login-box-body">
     <p class="login-box-msg">Ingresa para acceder a tu sesión</p>
 
-    <form action="view/home.php" method="post">
+    <form action="#"  method="POST" name="session">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Email" name="usuario">
+        <input type="text" class="form-control" placeholder="Email" name="usuario" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control" placeholder="Password" name="password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -66,8 +66,8 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" >Ingresar</button>
-            <a href="core/controllers/usuarioController.php"><button type="button" class="btn btn-primary btn-block btn-flat" >Ver usuarios</button></a>
+          <button type="submit" onclick="userLogin()" class="btn btn-primary btn-block btn-flat" >Ingresar</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="userLogin2()">Ingresar 2</button>
         </div>
         <!-- /.col -->
       </div>
@@ -88,20 +88,41 @@
 <!-- jQuery 3 -->
 <?php
 echo "
-<script src=".DIR."'views/bower_components/jquery/dist/jquery.min.js'></script>
+<script src='".DIR."views/bower_components/jquery/dist/jquery.min.js'></script>
 <!-- Bootstrap 3.3.7 -->
-<script src=".DIR."'views/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
-<!-- iCheck -->
-<script src='".DIR."plugins/iCheck/icheck.min.js'></script>";
+<script src='".DIR."views/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+<!-- iCheck -->";
+
 ?>
 <script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
+ 
+
+  
+  function userLogin(){
+    var usuario = $('form[name=session] input[name=usuario]')[0].value;
+    var password = $('form[name=session] input[name=password]')[0].value;
+    if(usuario=="" || password==""){
+      
+    }
+    else{
+    $.ajax({
+      type:"POST",
+      url:"http://localhost:81/fiscalizacion/Usuario/userlogin",
+      data:{usuario:usuario,password:password}
+    }
+    ).done(function(response){
+      //alert(response); para ver nada más
+      if(response==1){
+        document.location = "http://localhost:81/fiscalizacion/Principal/principal";
+      }
+      else{
+
+        alert("Email o Contraseña incorrectos");
+      }
+    })
+    }
+    
+  }
 </script>
 </body>
 </html>
