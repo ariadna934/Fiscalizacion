@@ -107,13 +107,13 @@ echo "
     else{
     $.ajax({
       type:"POST",
-      url:"http://localhost:81/fiscalizacion/Usuario/userlogin",
+      url:"http://localhost/fiscalizacion/Usuario/userlogin",
       data:{usuario:usuario,password:password}
-    }
+    } 
     ).done(function(response){
       //alert(response); para ver nada más
       if(response==1){
-        document.location = "http://localhost:81/fiscalizacion/Principal/principal";
+        document.location = "http://localhost/fiscalizacion/Principal/principal";
       }
       else{
 

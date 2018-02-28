@@ -1,5 +1,5 @@
 <?php
-const DIR = 'http://localhost:81/fiscalizacion/';
+const DIR = 'http://localhost/fiscalizacion/';
 const LBS = 'library/';
 const VIEWS = 'views/';
 define ('DFT','default/');
